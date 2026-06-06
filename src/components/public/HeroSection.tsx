@@ -72,12 +72,8 @@ export function HeroSection({ articles, onArticleClick }: HeroSectionProps) {
               </p>
 
               <div className="flex items-center gap-3 text-xs text-muted-foreground pt-1">
-                {leadArticle.author && (
-                  <span className="font-semibold text-foreground/85">{leadArticle.author.name}</span>
-                )}
-                {leadArticle.author && leadArticle.publishedAt && <span className="text-muted-foreground/30">•</span>}
                 {leadArticle.publishedAt && <span>{formatPublishDate(leadArticle.publishedAt)}</span>}
-                <span className="text-muted-foreground/30">•</span>
+                {leadArticle.publishedAt && <span className="text-muted-foreground/30">•</span>}
                 <div className="flex items-center gap-1">
                   <Eye className="h-3.5 w-3.5" />
                   <span>{leadArticle.views} visitas</span>

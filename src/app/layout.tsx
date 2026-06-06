@@ -31,11 +31,12 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   const siteName = settingsMap["site_name"] || "Noticias Hoy";
+  const seoTitle = settingsMap["seo_title"] || `${siteName} | Portal de Noticias Digital`;
   const siteDesc = settingsMap["site_description"] || "Tu portal de noticias digital de confianza. Las últimas noticias de tecnología, deportes, política, ciencia, cultura y economía.";
   const siteFavicon = settingsMap["site_favicon"] || "https://api.dicebear.com/9.x/initials/svg?seed=NH&backgroundColor=c0392b";
 
   return {
-    title: `${siteName} | Portal de Noticias Digital`,
+    title: seoTitle,
     description: siteDesc,
     keywords: ["noticias", "actualidad", "tecnología", "deportes", "política", "ciencia", "cultura", "economía"],
     authors: [{ name: siteName }],

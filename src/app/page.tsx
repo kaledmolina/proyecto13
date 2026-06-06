@@ -224,6 +224,29 @@ export function AppContent() {
   const [view, setView] = useState<'public' | 'admin'>('public')
   const [needsSetup, setNeedsSetup] = useState<boolean | null>(null)
 
+  const currentView = usePublicStore((s) => s.currentView)
+  const selectedArticle = usePublicStore((s) => s.selectedArticle)
+  const publicSettings = usePublicStore((s) => s.settings)
+  const fetchSettings = usePublicStore((s) => s.fetchSettings)
+
+  useEffect(() => {
+    fetchSettings()
+  }, [fetchSettings])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const siteName = publicSettings.site_name || 'Noticias Hoy'
+      const seoTitle = publicSettings.seo_title || `${siteName} | Portal de Noticias Digital`
+      if (view === 'admin') {
+        document.title = `Admin Panel | ${siteName}`
+      } else if (currentView === 'article' && selectedArticle) {
+        document.title = `${selectedArticle.title} | ${siteName}`
+      } else {
+        document.title = seoTitle
+      }
+    }
+  }, [view, currentView, selectedArticle, publicSettings])
+
   useEffect(() => {
     const checkSetup = async () => {
       try {
