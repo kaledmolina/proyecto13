@@ -30,7 +30,7 @@ export function PublicHeader({ onLoginClick }: PublicHeaderProps) {
   
   const settings = usePublicStore((s) => s.settings || {})
   const isSettingsLoading = Object.keys(settings).length === 0
-  const siteName = settings.site_name || 'NewsPortal'
+  const siteName = settings.site_name || 'Urabá Informa'
   const siteLogo = settings.site_logo
 
   const firstLetter = siteName.charAt(0)
@@ -64,8 +64,9 @@ export function PublicHeader({ onLoginClick }: PublicHeaderProps) {
     [selectCategory]
   )
 
-  // Split name for block representation
-  const blockLetters = siteName.substring(0, 3).toUpperCase().padEnd(3, 'N').split('')
+  // Split name for block representation (e.g. URA for Urabá Informa)
+  const cleanName = siteName.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ]/g, '')
+  const blockLetters = (cleanName.length >= 3 ? cleanName.substring(0, 3) : siteName.substring(0, 3)).toUpperCase().padEnd(3, 'U').split('')
 
   return (
     <header className="w-full flex flex-col border-b border-border/80">
@@ -114,10 +115,16 @@ export function PublicHeader({ onLoginClick }: PublicHeaderProps) {
             }}
             className="text-left"
           >
-            <h1 className="text-2xl font-black font-heading tracking-wide flex items-center gap-2">
-              <span>NEWS</span>
-              <span className="font-light text-white/80">{siteName.toUpperCase()}</span>
-            </h1>
+            {siteLogo ? (
+              <img src={siteLogo} alt={siteName} className="h-9 max-w-[240px] object-contain" />
+            ) : (
+              <h1 className="text-2xl font-black font-heading tracking-wide flex items-center gap-2">
+                <span>{siteName.split(' ')[0]?.toUpperCase() || 'URABÁ'}</span>
+                <span className="font-light text-white/80">
+                  {siteName.split(' ').slice(1).join(' ').toUpperCase() || 'INFORMA'}
+                </span>
+              </h1>
+            )}
           </button>
         </div>
       </div>

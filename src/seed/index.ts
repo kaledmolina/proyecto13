@@ -341,11 +341,11 @@ Los ambientalistas han calificado el acuerdo como "un paso necesario pero insufi
 
   // Create site settings
   const settings = [
-    { key: "site_name", value: "Noticias Hoy" },
-    { key: "site_description", value: "Tu portal de noticias digital de confianza" },
-    { key: "site_logo", value: "https://api.dicebear.com/9.x/initials/svg?seed=NH&backgroundColor=c0392b" },
-    { key: "seo_title", value: "Noticias Hoy - Últimas Noticias de Actualidad" },
-    { key: "seo_description", value: "Portal de noticias digital con las últimas noticias de tecnología, deportes, política, ciencia, cultura y economía." },
+    { key: "site_name", value: "Urabá Informa" },
+    { key: "site_description", value: "Tu portal de noticias digital de confianza en Urabá y Colombia" },
+    { key: "site_logo", value: "https://api.dicebear.com/9.x/initials/svg?seed=UI&backgroundColor=c0392b" },
+    { key: "seo_title", value: "Urabá Informa - Noticias de Urabá, Antioquia y Actualidad" },
+    { key: "seo_description", value: "Portal de noticias digital con las últimas noticias de Urabá, Antioquia, Colombia, deportes, política, cultura y economía." },
     { key: "banner_enabled", value: "true" },
     { key: "banner_text", value: "¡Suscríbete a nuestro boletín semanal!" },
     { key: "articles_per_page", value: "12" },

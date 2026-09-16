@@ -30,15 +30,15 @@ export async function generateMetadata(): Promise<Metadata> {
     console.error("Failed to fetch settings for metadata:", error);
   }
 
-  const siteName = settingsMap["site_name"] || "Noticias Hoy";
+  const siteName = settingsMap["site_name"] || "Urabá Informa";
   const seoTitle = settingsMap["seo_title"] || `${siteName} | Portal de Noticias Digital`;
-  const siteDesc = settingsMap["site_description"] || "Tu portal de noticias digital de confianza. Las últimas noticias de tecnología, deportes, política, ciencia, cultura y economía.";
-  const siteFavicon = settingsMap["site_favicon"] || "https://api.dicebear.com/9.x/initials/svg?seed=NH&backgroundColor=c0392b";
+  const siteDesc = settingsMap["site_description"] || "Tu portal de noticias digital de confianza. Las últimas noticias de Urabá, Antioquia, Colombia, actualidad, deportes y más.";
+  const siteFavicon = settingsMap["site_favicon"] || "https://api.dicebear.com/9.x/initials/svg?seed=UI&backgroundColor=c0392b";
 
   return {
     title: seoTitle,
     description: siteDesc,
-    keywords: ["noticias", "actualidad", "tecnología", "deportes", "política", "ciencia", "cultura", "economía"],
+    keywords: ["noticias", "urabá", "urabá informa", "actualidad", "antioquia", "colombia", "deportes", "política", "cultura", "economía"],
     authors: [{ name: siteName }],
     icons: {
       icon: siteFavicon,

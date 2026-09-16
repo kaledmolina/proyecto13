@@ -78,7 +78,7 @@ function SidebarContent({
   const isAdmin = session.user.role === 'ADMIN'
 
   const settings = useAdminStore((s) => s.settings || {})
-  const siteName = settings.site_name || 'Portal de Noticias'
+  const siteName = settings.site_name || 'Urabá Informa'
   const siteLogo = settings.site_logo
   const siteFavicon = settings.site_favicon
 

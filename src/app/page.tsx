@@ -235,7 +235,7 @@ export function AppContent() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const siteName = publicSettings.site_name || 'Noticias Hoy'
+      const siteName = publicSettings.site_name || 'Urabá Informa'
       const seoTitle = publicSettings.seo_title || `${siteName} | Portal de Noticias Digital`
       if (view === 'admin') {
         document.title = `Admin Panel | ${siteName}`

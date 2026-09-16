@@ -10,7 +10,7 @@ export function PublicFooter() {
 
   const settings = usePublicStore((s) => s.settings || {})
   const isSettingsLoading = Object.keys(settings).length === 0
-  const siteName = settings.site_name || 'NewsPortal'
+  const siteName = settings.site_name || 'Urabá Informa'
   const siteLogo = settings.site_logo
 
   const firstLetter = siteName.charAt(0)
@@ -42,7 +42,7 @@ export function PublicFooter() {
               )}
             </div>
             <p className="mb-6 max-w-sm text-xs leading-relaxed text-muted-foreground">
-              Tu fuente confiable de noticias de última hora, análisis en profundidad e historias de todo el mundo.
+              Tu fuente confiable de noticias de última hora, análisis en profundidad e historias de Urabá, Antioquia y el mundo.
             </p>
             {/* Social Links */}
             <div className="flex gap-2">
