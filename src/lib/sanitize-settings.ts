@@ -28,12 +28,13 @@ export function sanitizeSettings(settings: Record<string, string>): Record<strin
     result.seo_description = 'Portal de noticias digital con las últimas noticias de Urabá, Antioquia, Colombia, deportes, política, cultura y economía.';
   }
 
-  // site_logo (remove legacy dicebear placeholders)
+  // site_logo (remove legacy placeholders or previous brand logos like Radar CO)
   if (
     result.site_logo &&
     (result.site_logo.includes('seed=NH') ||
       result.site_logo.includes('seed=CD') ||
-      LEGACY_SITE_NAMES_REGEX.test(result.site_logo))
+      LEGACY_SITE_NAMES_REGEX.test(result.site_logo) ||
+      !result.site_logo.toLowerCase().includes('uraba'))
   ) {
     result.site_logo = '';
   }

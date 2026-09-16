@@ -84,7 +84,8 @@ function SidebarContent({
     settings.site_logo &&
     !settings.site_logo.includes('seed=NH') &&
     !settings.site_logo.includes('seed=CD') &&
-    !LEGACY_SITE_NAMES_REGEX.test(settings.site_logo)
+    !LEGACY_SITE_NAMES_REGEX.test(settings.site_logo) &&
+    settings.site_logo.toLowerCase().includes('uraba')
       ? settings.site_logo
       : ''
   const siteFavicon =

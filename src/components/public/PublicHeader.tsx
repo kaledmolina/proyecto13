@@ -113,22 +113,24 @@ export function PublicHeader({ onLoginClick }: PublicHeaderProps) {
       </div>
 
       {/* 2. BBC-style Red Brand Bar */}
-      <div className="w-full bg-primary text-white py-3">
+      <div className="w-full bg-primary text-white py-3.5 sm:py-4 shadow-inner">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <button
             onClick={() => {
               setView('home')
               handleCategoryClick(null)
             }}
-            className="text-left"
+            className="text-left group transition-transform active:scale-[0.99]"
           >
-            {siteLogo ? (
-              <img src={siteLogo} alt={siteName} className="h-9 max-w-[240px] object-contain" />
+            {siteLogo && siteLogo.toLowerCase().includes('uraba') ? (
+              <img src={siteLogo} alt={siteName} className="h-10 sm:h-12 max-w-[280px] object-contain" />
             ) : (
-              <h1 className="text-2xl font-black font-heading tracking-wide flex items-center gap-2">
-                <span>{siteName.split(' ')[0]?.toUpperCase() || 'URABÁ'}</span>
-                <span className="font-light text-white/80">
-                  {siteName.split(' ').slice(1).join(' ').toUpperCase() || 'INFORMA'}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-heading tracking-tight flex items-center gap-2 sm:gap-3 drop-shadow-sm">
+                <span className="bg-white text-primary px-3 py-0.5 rounded shadow-md font-black">
+                  URABÁ
+                </span>
+                <span className="font-extrabold text-white tracking-wide">
+                  INFORMA
                 </span>
               </h1>
             )}

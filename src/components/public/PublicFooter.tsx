@@ -37,14 +37,21 @@ export function PublicFooter() {
                 <div className="flex h-8 items-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin text-primary" />
                 </div>
-              ) : siteLogo ? (
+              ) : siteLogo && siteLogo.toLowerCase().includes('uraba') ? (
                 <img src={siteLogo} alt={siteName} className="h-10 max-w-[200px] object-contain w-auto transition-transform duration-300 hover:scale-105" />
               ) : (
-                <div className="flex items-center gap-1.5 font-heading">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground font-serif font-black shadow-md shadow-primary/20">
-                    {firstLetter}
+                <div className="flex items-center gap-2 font-heading">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground font-serif font-black text-sm shadow-md shadow-primary/20">
+                    U
                   </div>
-                  <span className="text-base font-extrabold tracking-tight text-gradient-primary">{restOfName}</span>
+                  <div className="flex flex-col">
+                    <span className="text-lg font-black tracking-tight leading-none text-foreground">
+                      URABÁ <span className="text-primary font-bold">INFORMA</span>
+                    </span>
+                    <span className="text-[10px] tracking-widest uppercase text-muted-foreground font-semibold mt-0.5">
+                      Periódico Digital
+                    </span>
+                  </div>
                 </div>
               )}
             </div>
