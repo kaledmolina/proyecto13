@@ -65,12 +65,6 @@ export function NewsGrid() {
   if (isLoading && articles.length === 0) {
     return (
       <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {/* Category filters skeleton */}
-        <div className="mb-8 flex gap-2">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Skeleton key={i} className="h-7 w-20 rounded-sm" />
-          ))}
-        </div>
         {/* Grid skeleton */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
@@ -121,40 +115,6 @@ export function NewsGrid() {
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      {/* Category Filter Tabs (Flat Editorial Style) */}
-      {categories.length > 0 && (
-        <div className="mb-8 flex flex-wrap border-b border-border/40 font-heading">
-          <button
-            onClick={() => handleCategorySelect(null)}
-            className={`px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition-all duration-200 border-b-2 -mb-[2px] ${
-              selectedCategory === null
-                ? 'border-primary text-primary'
-                : 'border-transparent text-muted-foreground hover:text-foreground'
-            }`}
-          >
-            Todas
-          </button>
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => handleCategorySelect(cat.slug)}
-              className={`px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition-all duration-200 border-b-2 -mb-[2px] ${
-                selectedCategory === cat.slug
-                  ? 'text-foreground font-black'
-                  : 'border-transparent text-muted-foreground hover:text-foreground'
-              }`}
-              style={
-                selectedCategory === cat.slug
-                  ? { borderBottomColor: cat.color, color: cat.color }
-                  : undefined
-              }
-            >
-              {cat.name}
-            </button>
-          ))}
-        </div>
-      )}
-
       {/* Search status banner */}
       {searchQuery && (
         <div className="mb-8 flex items-center justify-between border-l-4 border-primary bg-secondary/30 px-5 py-4">

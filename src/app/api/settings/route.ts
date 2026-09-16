@@ -2,10 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { sanitizeSettings } from "@/lib/sanitize-settings";
 
 export const dynamic = "force-dynamic";
 
-// GET /api/settings — get all settings as key-value object (public)
+// GET /api/settings — get all settings as key-value object (public) with auto-migration
 export async function GET() {
   try {
     const settings = await db.siteSettings.findMany();
@@ -13,7 +14,30 @@ export async function GET() {
     for (const s of settings) {
       settingsMap[s.key] = s.value;
     }
-    return NextResponse.json(settingsMap);
+
+    const sanitizedMap = sanitizeSettings(settingsMap);
+
+    // Auto-migrate in DB if any values were changed or missing
+    const updatesToPersist: { key: string; value: string }[] = [];
+    for (const [key, value] of Object.entries(sanitizedMap)) {
+      if (settingsMap[key] !== value) {
+        updatesToPersist.push({ key, value });
+      }
+    }
+
+    if (updatesToPersist.length > 0) {
+      Promise.all(
+        updatesToPersist.map((u) =>
+          db.siteSettings.upsert({
+            where: { key: u.key },
+            update: { value: u.value },
+            create: { key: u.key, value: u.value },
+          })
+        )
+      ).catch((err) => console.error("Auto-migration error in DB:", err));
+    }
+
+    return NextResponse.json(sanitizedMap);
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to fetch settings" },

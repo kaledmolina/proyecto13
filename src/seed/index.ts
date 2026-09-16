@@ -343,7 +343,7 @@ Los ambientalistas han calificado el acuerdo como "un paso necesario pero insufi
   const settings = [
     { key: "site_name", value: "Urabá Informa" },
     { key: "site_description", value: "Tu portal de noticias digital de confianza en Urabá y Colombia" },
-    { key: "site_logo", value: "https://api.dicebear.com/9.x/initials/svg?seed=UI&backgroundColor=c0392b" },
+    { key: "site_logo", value: "" },
     { key: "seo_title", value: "Urabá Informa - Noticias de Urabá, Antioquia y Actualidad" },
     { key: "seo_description", value: "Portal de noticias digital con las últimas noticias de Urabá, Antioquia, Colombia, deportes, política, cultura y economía." },
     { key: "banner_enabled", value: "true" },

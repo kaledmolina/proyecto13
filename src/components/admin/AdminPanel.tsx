@@ -32,6 +32,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { useAdminStore, type AdminSection } from '@/store/admin-store'
+import { sanitizeSiteName, LEGACY_SITE_NAMES_REGEX } from '@/lib/sanitize-settings'
 import { cn } from '@/lib/utils'
 
 import Dashboard from './Dashboard'
@@ -78,9 +79,20 @@ function SidebarContent({
   const isAdmin = session.user.role === 'ADMIN'
 
   const settings = useAdminStore((s) => s.settings || {})
-  const siteName = settings.site_name || 'Urabá Informa'
-  const siteLogo = settings.site_logo
-  const siteFavicon = settings.site_favicon
+  const siteName = sanitizeSiteName(settings.site_name)
+  const siteLogo =
+    settings.site_logo &&
+    !settings.site_logo.includes('seed=NH') &&
+    !settings.site_logo.includes('seed=CD') &&
+    !LEGACY_SITE_NAMES_REGEX.test(settings.site_logo)
+      ? settings.site_logo
+      : ''
+  const siteFavicon =
+    settings.site_favicon &&
+    !settings.site_favicon.includes('seed=NH') &&
+    !settings.site_favicon.includes('seed=CD')
+      ? settings.site_favicon
+      : ''
 
   const filteredItems = navItems.filter((item) => !item.adminOnly || isAdmin)
 

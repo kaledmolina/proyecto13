@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { sanitizeSettings } from '@/lib/sanitize-settings'
 
 export interface Category {
   id: string
@@ -88,7 +89,7 @@ export const usePublicStore = create<PublicState>((set, get) => ({
       const res = await fetch('/api/settings')
       if (res.ok) {
         const data = await res.json()
-        set({ settings: data })
+        set({ settings: sanitizeSettings(data) })
       }
     } catch {
       console.error('Failed to fetch settings')

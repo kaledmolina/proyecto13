@@ -5,6 +5,7 @@ import { SessionProvider, useSession, signIn, signOut } from 'next-auth/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePublicStore } from '@/store/public-store'
 import { useAdminStore } from '@/store/admin-store'
+import { sanitizeSiteName, LEGACY_SITE_NAMES_REGEX } from '@/lib/sanitize-settings'
 import { PublicHeader } from '@/components/public/PublicHeader'
 import { HeroSection } from '@/components/public/HeroSection'
 import { NewsGrid } from '@/components/public/NewsGrid'
@@ -235,8 +236,10 @@ export function AppContent() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const siteName = publicSettings.site_name || 'Urabá Informa'
-      const seoTitle = publicSettings.seo_title || `${siteName} | Portal de Noticias Digital`
+      const siteName = sanitizeSiteName(publicSettings.site_name)
+      const seoTitle = publicSettings.seo_title && !LEGACY_SITE_NAMES_REGEX.test(publicSettings.seo_title)
+        ? publicSettings.seo_title
+        : `${siteName} | Portal de Noticias Digital`
       if (view === 'admin') {
         document.title = `Admin Panel | ${siteName}`
       } else if (currentView === 'article' && selectedArticle) {

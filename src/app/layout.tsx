@@ -5,6 +5,7 @@ import { Toaster as ShadcnToaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 import { db } from "@/lib/db";
+import { sanitizeSettings } from "@/lib/sanitize-settings";
 
 const lora = Lora({
   variable: "--font-lora",
@@ -29,6 +30,8 @@ export async function generateMetadata(): Promise<Metadata> {
   } catch (error) {
     console.error("Failed to fetch settings for metadata:", error);
   }
+
+  settingsMap = sanitizeSettings(settingsMap);
 
   const siteName = settingsMap["site_name"] || "Urabá Informa";
   const seoTitle = settingsMap["seo_title"] || `${siteName} | Portal de Noticias Digital`;

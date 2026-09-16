@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Separator } from '@/components/ui/separator'
 import { usePublicStore } from '@/store/public-store'
+import { sanitizeSiteName, LEGACY_SITE_NAMES_REGEX } from '@/lib/sanitize-settings'
 
 interface PublicHeaderProps {
   onLoginClick: () => void
@@ -30,8 +31,14 @@ export function PublicHeader({ onLoginClick }: PublicHeaderProps) {
   
   const settings = usePublicStore((s) => s.settings || {})
   const isSettingsLoading = Object.keys(settings).length === 0
-  const siteName = settings.site_name || 'Urabá Informa'
-  const siteLogo = settings.site_logo
+  const siteName = sanitizeSiteName(settings.site_name)
+  const siteLogo =
+    settings.site_logo &&
+    !settings.site_logo.includes('seed=NH') &&
+    !settings.site_logo.includes('seed=CD') &&
+    !LEGACY_SITE_NAMES_REGEX.test(settings.site_logo)
+      ? settings.site_logo
+      : ''
 
   const firstLetter = siteName.charAt(0)
   const restOfName = siteName.slice(1)

@@ -1,6 +1,7 @@
 'use client'
 
 import { create } from 'zustand'
+import { sanitizeSettings } from '@/lib/sanitize-settings'
 
 // --- Types ---
 
@@ -331,7 +332,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       const res = await fetch('/api/settings')
       if (res.ok) {
         const data = await res.json()
-        set({ settings: data })
+        set({ settings: sanitizeSettings(data) })
       }
     } catch (error) {
       console.error('Failed to fetch settings:', error)
